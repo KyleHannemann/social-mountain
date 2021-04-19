@@ -8,7 +8,7 @@ import Compose from './Compose/Compose';
 class App extends Component {
   constructor() {
     super();
-
+//
     this.state = {
       posts: []
     };
