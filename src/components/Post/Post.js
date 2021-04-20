@@ -19,6 +19,7 @@ export default class Post extends Component {
       editing: false,
       showMasterMenu: false,
       liked: false,
+      reply: '',
     };
 
     this.hideEdit = this.hideEdit.bind( this );
@@ -26,8 +27,34 @@ export default class Post extends Component {
     this.toggleMasterMenu = this.toggleMasterMenu.bind( this );
     this.hideMasterMenu = this.hideMasterMenu.bind( this );
     this.like = this.like.bind(this);
+    this.reply = this.reply.bind(this);
+    this.updateReply = this.updateReply.bind(this);
+    this.sendReply = this.sendReply.bind(this);
+    this.cancelReply = this.cancelReply.bind(this);
     
     
+  }
+  sendReply(){
+    let reply = document.getElementById(this.props.id);
+    reply.style.display = "none";
+    this.setState({reply: ''})
+    alert('this feature is still being built')
+  }
+  updateReply(e){
+    let text = e.target.value;
+    this.setState({reply: text})
+    
+  }
+  reply(){
+    let reply = document.getElementById(this.props.id);
+    reply.style.display = "block";
+    
+  }
+  cancelReply(){
+    let reply = document.getElementById(this.props.id);
+    reply.style.display = "none";
+    this.setState({reply: ''})
+    console.log(this.state.reply)
   }
 
   like(e){
@@ -75,7 +102,7 @@ export default class Post extends Component {
 
     return (
       // Main body of post
-      <section id={this.props.id} className="Post__parent" onClick={ this.hideMasterMenu }>
+      <section  className="Post__parent" onClick={ this.hideMasterMenu }>
 
         {/* Three dots in top right corner */}
         <div className="Post__master-controls">
@@ -122,9 +149,14 @@ export default class Post extends Component {
 
         {/* These are all of the cute little icons in the bottom left corner */}
         <div className="Post__user-controls">
-          <ReplyIcon  className="Post__control-icon" />
+          <ReplyIcon  onClick={this.reply} className="Post__control-icon" />
           <FavoriteIcon onClick={this.like} className="Post__control-icon" />
           <MessageIcon  className="Post__control-icon" />
+        </div>
+        <div id={this.props.id} className="reply">
+          <textarea className="Edit__textarea" onChange={this.updateReply}/>
+          <button className="replyBut"onClick={this.sendReply}>Send</button>
+          <button className="cancelReply"onClick={this.cancelReply}>Cancel</button>
         </div>
 
       </section>

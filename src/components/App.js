@@ -19,8 +19,15 @@ class App extends Component {
     this.search = this.search.bind(this);
     this.clearSearch = this.componentDidMount.bind(this);
   }
+ /* addReply(reply, id){
+    console.log(reply, id)
+    let text = reply;
+    axios.put(`https://practiceapi.devmountain.com/api/posts?id=${id}`, {})
+    .then(response=>{console.log(response)}).catch(error=>{console.log(error)})
+  }*/
   
   componentDidMount() {
+
     axios.get('https://practiceapi.devmountain.com/api/posts')
     .then(response => {this.setState({posts: response.data}); console.log(response)}).catch(error => {console.log(error)})
     
@@ -49,7 +56,10 @@ class App extends Component {
   }
 
   render() {
+    
     const { posts } = this.state;
+    console.log(this.state.posts)
+    
    
 
     return (
